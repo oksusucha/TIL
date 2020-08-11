@@ -18,10 +18,10 @@ var Upgrader = websocket.Upgrader{
 
 func MsgSendHandler() {
 	for {
-        // 채널에서 메세지 전달 받음 
+        	// 채널에서 메세지 전달 받음 
 		msg := <-Broadcast
         
-        // 연결되어 있는 모든 클라이언트에게 메세지 전달
+        	// 연결되어 있는 모든 클라이언트에게 메세지 전달
 		for target := range Clients {
 			if err := target.WriteJSON(msg); err != nil {
 				target.Close()
@@ -40,14 +40,14 @@ func main() {
 }
 
 func SetupSubs() {
-    // 어디서 구독된 정보를 가져올지에 대한 레디스 채널 정보
+    	// 어디서 구독된 정보를 가져올지에 대한 레디스 채널 정보
 	_, ch := redisHandler.SystemSubscribe("sub-channel-*")
 
 	go func() {
 		for {
-            // 레디스로 넘어온 데이터를 메세지에 담음
+            		// 레디스로 넘어온 데이터를 메세지에 담음
 			msg := <-ch
-            // 메세지를 다시 websocket의 채널로 넘겨줌
+            		// 메세지를 다시 websocket의 채널로 넘겨줌
 			websocket.Broadcast <- msg
 		}
 	}()
@@ -63,7 +63,7 @@ type Event struct {
 }
 
 func SystemSubscribe(channel string) (*Event, chan []byte) {
-    // redis connection
+    	// redis connection
 	client := GetRedisConnection(2) // redis DB 번호
     
 	pubsub := client.PSubscribe(channel)
@@ -83,7 +83,7 @@ func SystemSubscribe(channel string) (*Event, chan []byte) {
 			}
 			switch msg := msg.(type) {
 			case *redis.Message:
-                // 필요한 데이터만 채널로 넘겨줌
+               			// 필요한 데이터만 채널로 넘겨줌
 				c <- []byte(msg.Payload)
 			default:
 			}
@@ -110,8 +110,8 @@ r.GET("/ws", func() {
 ```
 
 > 어디에 쓸까?
-+ 대쉬보드
-+ 채팅 
++ 대쉬보드의 정보성 데이터 (서버 상태정보, 동시접속유저 등)
++ 채팅
 + 주식 등 실시간 변동성 데이터
 
 > 고민할 점?
