@@ -20,6 +20,7 @@ trx := db.Begin()
 // Connection release
 db.Commit()
 db.Rollback()
+
 // 또는
 trx.Commit()
 trx.Rollback()
