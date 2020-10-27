@@ -23,3 +23,13 @@ def youtube_downloader():
     except Exception as e:
         print('error', e)
 ```
+```python
+def youtube_downloader_for_subprocess(self):
+    # .%(ext)s 를 넣은 이유는 .wav 라고 파일명을 고정해버리면 파일의 메타데이터 안에 video/mp4 로 고정되버리는 현상이 있음
+    command = "youtube-dl --extract-audio --audio-format wav -f 'bestaudio[ext=m4a]/bestaudio' -o '{0}.%(ext)s' {1}".format(path, url)
+
+    print("Command: " + command)
+
+    subprocess.call(command, shell=True)
+
+```
