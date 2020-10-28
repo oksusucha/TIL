@@ -3,6 +3,23 @@
 참고: https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/#SetupanSSHkey-ssh2
 
 * MAC 에서 go get 할때 403 오류
+```log
+Unauthorized
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+go: missing Mercurial command. See https://golang.org/s/gogetcmd
+# cd .; git ls-remote https://bitbucket.org/USERNAME_OR_ORGANISATION/REPOSITORY
+Unauthorized
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+go: missing Mercurial command. See https://golang.org/s/gogetcmd
+go get bitbucket.org/xinapsedev/malmoyidl: reading https://api.bitbucket.org/2.0/repositories/USERNAME_OR_ORGANISATION/REPOSITORY?fields=scm: 403 Forbidden
+	server response: Access denied. You must have write or admin access.
+```
 
 #### Step 1. Set up your default identity
 
