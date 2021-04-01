@@ -1,9 +1,9 @@
-### Jenkins Run
+### Run Jenkins
 ```Shell
 docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v /jenkins:/var/jenkins_home --name jm_jenkins -u root jenkins/jenkins:lts
 ```
 
-### Docker install
+### Install Docker in Jenkins container
 ```Shell
 apt-get update && \
 apt-get -y install apt-transport-https \
