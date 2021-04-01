@@ -74,9 +74,9 @@ func (server *FileServer) UploadFile(stream pb.YOUR_SERVICE_NAME_UploadFileServe
 	if err := stream.SendAndClose(res); err != nil {
 		fmt.Println("SendAndClose : ", err)
         
-        return &pb.YOUR_RESPONSE{
-            // fill your response spec in
-        }
+                return &pb.YOUR_RESPONSE{
+                    // fill your response spec in
+                }
 	}
 
 	fmt.Println("UploadFile end.")
@@ -116,7 +116,7 @@ func main() {
 
 	// create Metadata
 	req := &pb.YOUR_REQUEST{
-        Data: &pb.YOUR_REQUEST_Metadata{
+        Data: &pb.YOUR_REQUEST_Metadata {
 			Metadata: // Fill YOUR_SPEC in,
 		},
 	}
@@ -128,13 +128,13 @@ func main() {
 	}
 
 	// 파일 열기
-    fiePath := "/YOUR_TARGET_FILE"
-	file, err := os.Open(fiePath)
-    defer file.Close()
-	if err != nil {
-		fmt.Println("Open : ", err)
-		return
-	}
+        fiePath := "/YOUR_TARGET_FILE"
+        file, err := os.Open(fiePath)
+        defer file.Close()
+        if err != nil {
+                fmt.Println("Open : ", err)
+                return
+        }
 
 	// 파일 읽기
 	reader := bufio.NewReader(file)
@@ -151,11 +151,11 @@ func main() {
 
 		size += read
 
-		req := &pb.YOUR_REQUEST{
-            Data: &pb.YOUR_REQUEST_ChunkData{
-				ChunkData: buffer[:read],
-			},
-		}
+		req := &pb.YOUR_REQUEST {
+                Data: &pb.YOUR_REQUEST_ChunkData {
+                            ChunkData: buffer[:read],
+                        },
+                }
 
 		if err = stream.Send(req); err != nil {
 			fmt.Println("Send : ", err)
