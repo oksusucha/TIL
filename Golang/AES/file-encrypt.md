@@ -22,7 +22,7 @@ func FileEncodingForAES(originFilePath string) (key string, outputPath string, e
 
 	savePath := "/tmp/encrypt/test"
   
-  if _, err := os.Stat(savePath); os.IsNotExist(err) {
+        if _, err := os.Stat(savePath); os.IsNotExist(err) {
 		os.MkdirAll(savePath, 0755)
 	}
 
