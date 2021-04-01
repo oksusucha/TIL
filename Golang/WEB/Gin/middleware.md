@@ -1,3 +1,4 @@
+### REST로 들어가기 전 미들웨어로 동작
 ```go
 package rabbitmq
 
@@ -15,6 +16,7 @@ func RabbitConnection() gin.HandlerFunc {
     if err != nil {
       c.Abort()
     } else {
+		  // *gin.Context 에 넣어주는 부분
       c.Set("amqp_conn", conn)
 			c.Set("amqp_ch", ch)
 
@@ -40,5 +42,4 @@ func getConnection() (*amqp.Connection, *amqp.Channel, error) {
 
 	return connection, channel, err
 }
-
 ```
