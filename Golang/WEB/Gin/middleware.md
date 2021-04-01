@@ -13,15 +13,15 @@ func RabbitConnection() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		conn, ch, err := getConnection()
 
-    if err != nil {
-      c.Abort()
-    } else {
-		  // *gin.Context 에 넣어주는 부분
-      c.Set("amqp_conn", conn)
+		if err != nil {
+			c.Abort()
+		} else {
+			// *gin.Context 에 넣어주는 부분
+			c.Set("amqp_conn", conn)
 			c.Set("amqp_ch", ch)
 
 			c.Next()
-    }
+		}
 	}
 }
 
